@@ -1,0 +1,61 @@
+/***
+  New message button
+***/
+
+.new-message {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+}
+
+/***
+  Message links in list
+***/
+.contact-messages a{
+  display: block;
+  width: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+.contact-messages .even {
+  background: #EEEEEE;
+}
+
+/***
+  Inbound and outbound messages
+***/
+.messages {
+  background: #EEEEEE;
+}
+
+.outbound .message,
+.inbound .message {
+  display: block;
+  padding: 16px;
+  border-radius: 2px;
+}
+
+.outbound {
+  padding-left:72px;
+}
+.outbound .message {
+  background: #FFF;
+  width: 100%;
+}
+.inbound {
+  padding-right:72px;
+}
+.inbound .message {
+  float:left;
+  width: calc(100% - 56px);
+  background: #F44336;
+  color: #fff;
+}
+
+/***
+  Form adjustments
+***/
+
+button.full-width {
+  width: 100%;
+}

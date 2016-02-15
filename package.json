@@ -1,0 +1,26 @@
+{
+  "name": "inboks",
+  "version": "1.0.0",
+  "description": "An SMS inbox for Twilio",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "twilio",
+    "sms"
+  ],
+  "author": "Phil Nash <philnash@twilio.com>",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.14.2",
+    "express": "^4.13.4",
+    "hbs": "^4.0.0",
+    "morgan": "^1.6.1",
+    "object.values": "^1.0.3",
+    "twilio": "^3.3.0-edge"
+  },
+  "devDependencies": {
+    "dotenv": "^2.0.0"
+  }
+}

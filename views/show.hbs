@@ -1,0 +1,29 @@
+<ul class="mdl-list">
+  {{#each messages}}
+    <li class="mdl-list__item {{#if this.isInbound}}inbound{{else}}outbound{{/if}}" id="{{this.sid}}">
+      <span class="mdl-list__item-primary-content">
+        {{#if this.isInbound}}
+          <i class="material-icons mdl-list__item-avatar">person</i>
+        {{/if}}
+        <span class="mdl-list__item-sub-title message">{{this.body}}</span>
+      </span>
+      {{#if this.isOutbound}}
+        <span class="mdl-list__item-secondary-content">
+          <span class="mdl-list__item-secondary-action" href="#"><i class="material-icons mdl-list__item-avatar">person</i></span>
+        </span>
+      {{/if}}
+    </li>
+  {{/each}}
+</ul>
+
+<form action="/messages/{{ phoneNumber }}" method="POST" class="mdl-grid">
+  <div class="mdl-textfield mdl-js-textfield mdl-cell mdl-cell--10-col mdl-cell--6-col-tablet mdl-cell--4-col-phone">
+    <textarea class="mdl-textfield__input" type="text" rows="2" id="body" name="body"></textarea>
+    <label class="mdl-textfield__label" for="body">Message</label>
+  </div>
+  <div class="mdl-textfield mdl-cell mdl-cell--2-col mdl-cell--2-col-tablet mdl-cell--4-col-phone">
+    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect full-width">
+      Send
+    </button>
+  </div>
+</form>

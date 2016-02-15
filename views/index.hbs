@@ -1,0 +1,18 @@
+<ul class="mdl-list contact-messages">
+  {{#each messages}}
+    <li class="mdl-list__item mdl-list__item--two-line {{cycle 'odd even'}}">
+      <a href="/messages/{{this.from}}#{{this.sid}}">
+        <span class="mdl-list__item-primary-content">
+          <i class="material-icons mdl-list__item-avatar">person</i>
+          <span>{{ this.from }}</span>
+          <span class="mdl-list__item-sub-title">{{this.body}}</span>
+        </span>
+      </a>
+    </li>
+  {{/each}}
+</ul>
+
+<a class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored new-message" href="/messages/new">
+  <i class="material-icons">add</i>
+</a>
+

@@ -1,5 +1,5 @@
 {
-  "name": "inboks",
+  "name": "sms-messages-app",
   "version": "1.0.0",
   "description": "An SMS inbox for Twilio",
   "main": "index.js",

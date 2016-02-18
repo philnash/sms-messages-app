@@ -67,5 +67,5 @@ app.use(function(err, req, res, next) {
 });
 
 app.listen(process.env.PORT || 3000, function(){
-  console.log("Inboks listening on localhost:3000");
+  console.log("SMS Messages App listening on localhost:3000");
 });

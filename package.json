@@ -18,7 +18,8 @@
     "hbs": "^4.0.0",
     "morgan": "^1.6.1",
     "object.values": "^1.0.3",
-    "twilio": "^3.3.0-edge"
+    "twilio": "^3.3.0-edge",
+    "web-push": "^1.0.2"
   },
   "devDependencies": {
     "dotenv": "^2.0.0"

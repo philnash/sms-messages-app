@@ -5,11 +5,14 @@ const express = require('express');
 const router = express.Router();
 const twilio = require('twilio');
 const values = require('object.values');
+const webPush = require('web-push');
 
 // application requires
 const config = require("../config");
 
 const client = twilio(config.accountSid, config.authToken);
+let pushEndpoint;
+webPush.setGCMAPIKey(process.env.GCM_API_KEY);
 
 router.get("/", function(req, res, next) {
   client.messages.list({to: config.phoneNumber}).then(function(data) {
@@ -106,6 +109,20 @@ router.post("/messages/:phoneNumber", function(req, res, next) {
     console.log(err);
     res.redirect("/messages/"+req.params.phoneNumber);
   });
+});
+
+router.post("/subscription", function(req, res, next) {
+  pushEndpoint = req.body.endpoint;
+  res.send();
+});
+
+router.post("/webhooks/message", function(req, res, next) {
+  console.log(req.body.From, req.body.Body);
+  if (pushEndpoint) {
+    webPush.sendNotification(pushEndpoint, 120);
+  }
+  res.set('Content-Type', 'application/xml');
+  res.send("<Response/>");
 });
 
 module.exports = router;

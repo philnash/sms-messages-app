@@ -1,0 +1,8 @@
+{
+  "name": "SMS Messages App",
+  "developer": {
+    "name": "YOUR_NAME",
+    "url": "YOUR_URL"
+  },
+  "gcm_sender_id": "YOUR_PROJECT_NUMBER"
+}

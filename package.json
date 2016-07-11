@@ -15,10 +15,12 @@
   "dependencies": {
     "body-parser": "^1.14.2",
     "express": "^4.13.4",
+    "express-formidable": "^0.1.3",
     "hbs": "^4.0.0",
     "morgan": "^1.6.1",
     "object.values": "^1.0.3",
-    "twilio": "^3.3.0-edge"
+    "twilio": "^3.3.0-edge",
+    "web-push": "^2.0.2"
   },
   "devDependencies": {
     "dotenv": "^2.0.0"

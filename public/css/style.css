@@ -18,14 +18,14 @@
   text-decoration: none;
 }
 .contact-messages .even {
-  background: #EEEEEE;
+  background: #f8f8f8;
 }
 
 /***
   Inbound and outbound messages
 ***/
 .messages {
-  background: #EEEEEE;
+  background: #f8f8f8;
 }
 
 .outbound .message,
@@ -58,4 +58,24 @@
 
 button.full-width {
   width: 100%;
+}
+
+/***
+  Alerts
+***/
+
+.alert {
+  background: #f8f8f8;
+  position: relative;
+  top: -59px;
+  margin-bottom: -59px;
+  -webkit-transition: top 0.3s, margin-bottom 0.3s;
+  transition: top 0.3s, margin-bottom 0.3s;
+}
+.alert.show {
+  top: 0;
+  margin-bottom: 0;
+}
+.alert a {
+  color: #666;
 }

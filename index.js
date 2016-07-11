@@ -3,6 +3,7 @@
 // npm modules
 const express = require("express");
 const bodyParser = require("body-parser");
+const formidable = require("express-formidable");
 const logger = require("morgan");
 const hbs = require("hbs");
 
@@ -11,7 +12,9 @@ const path = require("path");
 
 // application requires
 const config = require("./config");
-const routes = require('./routes/index');
+const manifestRoute = require("./routes/manifest");
+const messageRoutes = require("./routes/index");
+const pushRoutes = require("./routes/push");
 
 const app = express();
 
@@ -19,6 +22,8 @@ const app = express();
 app.use(logger('dev'));
 // Parse form data from POST bodies
 app.use(bodyParser.urlencoded({ extended: true }));
+// Parse form data from multipart/form encoded bodies
+app.use(formidable.parse());
 // Public directory hosts static content
 app.use(express.static(path.join(__dirname, 'public')));
 // Set handlebars as view engine
@@ -32,8 +37,9 @@ hbs.registerHelper('cycle', function(value, block) {
 });
 
 // Routes
-app.use("/", routes);
-
+app.use("/", manifestRoute);
+app.use("/", messageRoutes);
+app.use("/push/", pushRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

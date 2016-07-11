@@ -10,5 +10,7 @@ try {
 module.exports = {
   accountSid: process.env.TWILIO_ACCOUNT_SID,
   authToken: process.env.TWILIO_AUTH_TOKEN,
-  phoneNumber: process.env.TWILIO_PHONE_NUMBER
+  phoneNumber: process.env.TWILIO_PHONE_NUMBER,
+  gcmAPIKey: process.env.GCM_API_KEY,
+  gcmSenderId: process.env.GCM_SENDER_ID
 }

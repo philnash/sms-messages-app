@@ -1,8 +1,7 @@
 "use strict";
 
 // npm modules
-const express = require('express');
-const router = express.Router();
+const router = require('express').Router();
 const twilio = require('twilio');
 const values = require('object.values');
 
@@ -62,7 +61,19 @@ router.post("/messages", function(req, res, next) {
     console.log(err);
     res.redirect("/messages/new");
   });
-})
+});
+
+router.get("/messages/latest", function(req, res, next) {
+  client.messages.list({to: config.phoneNumber, pageSize: 1}).then(function(data) {
+    let message = data.messages[0];
+    let response = {
+      from: message.from,
+      body: message.body
+    };
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(response));
+  });
+});
 
 router.get("/messages/:phoneNumber", function(req, res, next) {
   let incoming = client.messages.list({

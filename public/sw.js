@@ -1,4 +1,4 @@
-const cacheName = "sms-v2";
+const cacheName = "sms-v3";
 const fontCache = "sms-font-cache-v2";
 
 function returnFromCache(request, cache) {
@@ -51,3 +51,37 @@ self.addEventListener("fetch", function(event) {
     event.respondWith(returnFromCacheOrFetchAndCache(event.request, fontCache));
   }
 })
+
+function showNotification(message) {
+  console.log(message);
+  return self.registration.showNotification("From: " + message.from, {
+    body: message.body,
+    data: {
+      path: "/messages/" + message.from
+    }
+  });
+}
+
+self.addEventListener('push', function(event) {
+  console.log(event);
+  event.waitUntil(
+    fetch("/messages/latest").then(function(data) {
+      console.log(data);
+      return data.json();
+    }).then(showNotification)
+  );
+});
+
+self.addEventListener('notificationclick', function(event) {
+  var url = 'http://localhost:3000' + event.notification.data.path;
+  event.waitUntil(
+    clients.matchAll().then(function(clientList) {
+      event.notification.close();
+      if (clientList.length === 0) {
+        return clients.openWindow(url);
+      } else {
+        return clientList[0].focus();
+      }
+    })
+  );
+});

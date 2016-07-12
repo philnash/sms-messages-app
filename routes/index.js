@@ -56,10 +56,10 @@ router.post("/messages", function(req, res, next) {
     to: req.body.phoneNumber,
     body: req.body.body
   }).then(function(data) {
-    res.redirect("/messages/"+req.body.phoneNumber);
+    res.redirect("/messages/"+req.body.phoneNumber+"#"+data.sid);
   }).catch(function(err) {
     console.log(err);
-    res.redirect("/messages/new");
+    res.redirect(req.header('Referer') || '/');
   });
 });
 

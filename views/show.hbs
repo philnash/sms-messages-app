@@ -16,7 +16,8 @@
   {{/each}}
 </ul>
 
-<form action="/messages/{{ phoneNumber }}" method="POST" class="mdl-grid">
+<form action="/messages" method="POST" class="mdl-grid">
+  <input type="hidden" id="phoneNumber" name="phoneNumber" value="{{ phoneNumber }}">
   <div class="mdl-textfield mdl-js-textfield mdl-cell mdl-cell--10-col mdl-cell--6-col-tablet mdl-cell--4-col-phone">
     <textarea class="mdl-textfield__input" type="text" rows="2" id="body" name="body"></textarea>
     <label class="mdl-textfield__label" for="body">Message</label>

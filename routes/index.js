@@ -106,17 +106,4 @@ router.get("/messages/:phoneNumber", function(req, res, next) {
   });
 });
 
-router.post("/messages/:phoneNumber", function(req, res, next) {
-  client.messages.create({
-    from: config.phoneNumber,
-    to: req.params.phoneNumber,
-    body: req.body.body
-  }).then(function(data) {
-    res.redirect("/messages/"+req.params.phoneNumber);
-  }).catch(function(err) {
-    console.log(err);
-    res.redirect("/messages/"+req.params.phoneNumber);
-  });
-});
-
 module.exports = router;

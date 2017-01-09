@@ -19,6 +19,7 @@ const app = express();
 app.use(logger('dev'));
 // Parse form data from POST bodies
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 // Public directory hosts static content
 app.use(express.static(path.join(__dirname, 'public')));
 // Set handlebars as view engine

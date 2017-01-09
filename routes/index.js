@@ -57,12 +57,21 @@ router.post("/messages", function(req, res, next) {
     to: req.body.phoneNumber,
     body: req.body.body
   }).then(function(data) {
-    res.redirect("/messages/"+req.body.phoneNumber);
+    if (req.xhr) {
+      res.setHeader('Content-Type', 'application/json');
+      res.send(JSON.stringify({ result: "success" }));
+    } else {
+      res.redirect("/messages/"+req.body.phoneNumber+"#"+data.sid);
+    }
   }).catch(function(err) {
-    console.log(err);
-    res.redirect("/messages/new");
+    if (req.xhr) {
+      res.setHeader('Content-Type', 'application/json');
+      res.status(err.status).send(JSON.stringify(err));
+    } else {
+      res.redirect(req.header('Referer') || '/');
+    }
   });
-})
+});
 
 router.get("/messages/:phoneNumber", function(req, res, next) {
   let incoming = client.messages.list({
@@ -92,19 +101,6 @@ router.get("/messages/:phoneNumber", function(req, res, next) {
       bodyClass: "messages",
       title: req.params.phoneNumber
     });
-  });
-});
-
-router.post("/messages/:phoneNumber", function(req, res, next) {
-  client.messages.create({
-    from: config.phoneNumber,
-    to: req.params.phoneNumber,
-    body: req.body.body
-  }).then(function(data) {
-    res.redirect("/messages/"+req.params.phoneNumber);
-  }).catch(function(err) {
-    console.log(err);
-    res.redirect("/messages/"+req.params.phoneNumber);
   });
 });
 

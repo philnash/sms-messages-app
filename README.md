@@ -31,7 +31,7 @@ $ cp .env.example .env
 Then start the application:
 
 ```bash
-$ node index.js
+$ npm start
 ```
 
 Navigate to [http://localhost:3000](http://localhost:3000) and you will see the application.

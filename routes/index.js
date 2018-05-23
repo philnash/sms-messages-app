@@ -12,8 +12,7 @@ const config = require("../config");
 const client = twilio(config.accountSid, config.authToken);
 
 router.get("/", function(req, res, next) {
-  client.messages.list({to: config.phoneNumber}).then(function(data) {
-    let messages = data.messages;
+  client.messages.list({to: config.phoneNumber}).then(function(messages) {
     messages = messages.reduce(function(accumulator, currentMessage){
       if(!accumulator[currentMessage.from]) {
         accumulator[currentMessage.from] = currentMessage;
@@ -29,8 +28,7 @@ router.get("/", function(req, res, next) {
 });
 
 router.get("/outbox", function(req, res, next) {
-  client.messages.list({from: config.phoneNumber}).then(function(data) {
-    let messages = data.messages;
+  client.messages.list({from: config.phoneNumber}).then(function(messages) {
     messages = messages.reduce(function(accumulator, currentMessage){
       if(!accumulator[currentMessage.to]) {
         accumulator[currentMessage.to] = currentMessage;
@@ -83,7 +81,7 @@ router.get("/messages/:phoneNumber", function(req, res, next) {
     to: req.params.phoneNumber
   });
   Promise.all([incoming, outgoing]).then(function(values) {
-    var allMessages = values[0].messages.concat(values[1].messages);
+    var allMessages = values[0].concat(values[1]);
     allMessages.sort(function(a, b){
       let date1 = Date.parse(a.dateCreated);
       let date2 = Date.parse(b.dateCreated);

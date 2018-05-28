@@ -50,16 +50,23 @@ router.get("/messages/new", function(req, res, next) {
 });
 
 router.post("/messages", function(req, res, next) {
-  client.messages.create({
-    from: config.phoneNumber,
-    to: req.body.phoneNumber,
-    body: req.body.body
-  }).then(function(data) {
+  const numbers = req.body.phoneNumber.split(',').map(function(number) { return number.trim(); });
+  Promise.all(numbers.map(function(number) {
+    return client.messages.create({
+      from: config.phoneNumber,
+      to: number,
+      body: req.body.body
+    });
+  })).then(function(data) {
     if (req.xhr) {
       res.setHeader('Content-Type', 'application/json');
       res.send(JSON.stringify({ result: "success" }));
     } else {
-      res.redirect("/messages/"+req.body.phoneNumber+"#"+data.sid);
+      if (numbers.length > 1) {
+        res.redirect("/outbox");
+      } else {
+        res.redirect("/messages/"+numbers[0]);
+      }
     }
   }).catch(function(err) {
     if (req.xhr) {
